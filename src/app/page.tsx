@@ -9,12 +9,10 @@ import {
   Phone,
   MessageCircle,
   Clock,
-  MapPin,
-  Star,
-  ChevronDown,
   ShieldCheck,
   Sparkles,
-  Droplet,
+  Star,
+  ChevronDown,
 } from "lucide-react";
 
 /**
@@ -171,7 +169,7 @@ const ScrollProgress = () => {
 const MagneticButton = ({ children, className, onClick }: any) => (
   <button
     onClick={onClick}
-    className={`relative group overflow-hidden rounded-full border border-[#0B1215] px-8 py-4 font-mono text-xs uppercase tracking-widest transition-all duration-500 hover:bg-[#0B1215] hover:text-white active:scale-95 ${className}`}
+    className={`relative group overflow-hidden rounded-full border border-[#0B1215] px-6 py-3 md:px-8 md:py-4 font-mono text-xs uppercase tracking-widest transition-all duration-500 hover:bg-[#0B1215] hover:text-white active:scale-95 ${className}`}
   >
     <span className="relative z-10 flex items-center gap-2">{children}</span>
   </button>
@@ -201,14 +199,17 @@ const ServiceRow = ({ service, index }: any) => (
           {service.desc}
         </p>
       </div>
-      <div className="w-full md:w-1/4 flex items-end justify-between md:justify-end gap-12 font-mono text-sm border-t md:border-t-0 border-[#0B1215]/10 pt-4 md:pt-0 mt-4 md:mt-0">
-        <div className="text-right">
+      {/* Responsive Price Grid: Stacked on mobile, flex on desktop */}
+      <div className="w-full md:w-1/4 grid grid-cols-2 md:flex md:items-end md:justify-end gap-4 md:gap-12 font-mono text-sm border-t md:border-t-0 border-[#0B1215]/10 pt-4 md:pt-0 mt-4 md:mt-0">
+        <div className="md:text-right">
           <span className="block text-[#0B1215]/40 text-xs mb-1">Time</span>
-          <span>{service.time}</span>
+          <span className="text-[#0B1215]">{service.time}</span>
         </div>
-        <div className="text-right">
+        <div className="md:text-right">
           <span className="block text-[#0B1215]/40 text-xs mb-1">INR</span>
-          <span className="text-xl font-serif">₹{service.price}</span>
+          <span className="text-xl font-serif text-[#0B1215]">
+            ₹{service.price}
+          </span>
         </div>
       </div>
     </div>
@@ -229,8 +230,8 @@ const ServiceRow = ({ service, index }: any) => (
 const HomePage = ({ setPage }: any) => (
   <>
     {/* HERO */}
-    <section className="relative h-screen flex flex-col justify-between p-6 md:p-12 lg:p-24 overflow-hidden animate-fade-in">
-      <div className="flex justify-between items-start mt-16 md:mt-0">
+    <section className="relative min-h-screen flex flex-col justify-between p-6 pt-24 md:p-12 lg:p-24 overflow-hidden animate-fade-in">
+      <div className="flex justify-between items-start">
         <div className="font-mono text-xs uppercase tracking-widest max-w-[200px]">
           Bengaluru, India
           <br />
@@ -243,18 +244,18 @@ const HomePage = ({ setPage }: any) => (
         </div>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 mt-8 md:mt-0">
         <h1 className="text-[14vw] leading-[0.85] font-serif font-medium tracking-tighter text-[#0B1215]">
           BLUE <span className="italic font-light">LEAF</span>
         </h1>
         <div className="h-px w-full bg-[#0B1215] mt-4 mb-8"></div>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pb-12 md:pb-0">
           <p className="max-w-md text-lg md:text-xl font-light leading-relaxed">
             Ancient wellness traditions meeting modern architectural luxury.
             Relax, rejuvenate, and restore your balance.
           </p>
           <div
-            className="flex items-center gap-4 cursor-pointer mt-8 md:mt-0"
+            className="flex items-center gap-4 cursor-pointer mt-4 md:mt-0"
             onClick={() => setPage("menu")}
           >
             <MagneticButton className="border-[#0B1215]">
@@ -264,11 +265,11 @@ const HomePage = ({ setPage }: any) => (
         </div>
       </div>
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] rounded-full border border-[#0B1215]/5 z-0 animate-[spin_60s_linear_infinite]"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] rounded-full border border-[#0B1215]/5 z-0 animate-[spin_60s_linear_infinite] pointer-events-none"></div>
     </section>
 
     {/* IMAGE BREAK */}
-    <div className="w-full h-[60vh] overflow-hidden relative">
+    <div className="w-full h-[50vh] md:h-[60vh] overflow-hidden relative">
       <img
         src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
         className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
@@ -278,12 +279,12 @@ const HomePage = ({ setPage }: any) => (
 
     {/* TEASER */}
     <section className="py-24 md:py-32 px-6 md:px-24 max-w-[1600px] mx-auto">
-      <div className="flex flex-col md:flex-row gap-16">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
         <div className="md:w-1/3">
-          <h2 className="text-4xl font-serif">The Philosophy</h2>
+          <h2 className="text-3xl md:text-4xl font-serif">The Philosophy</h2>
         </div>
         <div className="md:w-2/3">
-          <p className="text-xl font-light leading-relaxed mb-8">
+          <p className="text-lg md:text-xl font-light leading-relaxed mb-8">
             Blue Leaf is not just a spa. It is a sanctuary for the soul. We
             believe in the healing power of touch, the purity of organic oils,
             and the luxury of silence.
@@ -303,10 +304,11 @@ const HomePage = ({ setPage }: any) => (
 const MenuPage = () => (
   <div className="pt-24 md:pt-32 min-h-screen animate-fade-in bg-white">
     <div className="px-6 md:px-24 mb-12 md:mb-16">
-      <h2 className="text-[14vw] md:text-8xl font-serif text-[#0B1215] leading-none opacity-10">
+      {/* Title scales responsively but caps at a readable max size on desktop */}
+      <h2 className="text-[14vw] md:text-8xl lg:text-[120px] font-serif text-[#0B1215] leading-none opacity-10">
         MENU
       </h2>
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mt-[-4vw] md:mt-[-4vw]">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mt-[-4vw] md:mt-[-30px]">
         <h1 className="text-4xl md:text-6xl font-serif text-[#0B1215]">
           Bodywork
         </h1>
@@ -345,7 +347,9 @@ const MenuPage = () => (
                     {item.time}
                   </span>
                 </div>
-                <span className="font-serif text-lg">₹{item.price}</span>
+                <span className="font-serif text-lg whitespace-nowrap">
+                  ₹{item.price}
+                </span>
               </div>
             ))}
           </div>
@@ -370,7 +374,9 @@ const MenuPage = () => (
                     {item.time}
                   </span>
                 </div>
-                <span className="font-serif text-lg">₹{item.price}</span>
+                <span className="font-serif text-lg whitespace-nowrap">
+                  ₹{item.price}
+                </span>
               </div>
             ))}
             <div className="mt-12 p-8 bg-[#0B1215] text-[#E0E5E5]">
@@ -397,17 +403,17 @@ const AboutPage = () => (
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-24">
-        <div>
-          <p className="text-xl leading-relaxed font-light mb-8">
+        <div className="order-2 md:order-1">
+          <p className="text-lg md:text-xl leading-relaxed font-light mb-8">
             Welcome to Blue Leaf Parlour & Spa. We stand at the intersection of
             ancient Thai wellness traditions and modern, hygienic luxury.
           </p>
-          <p className="text-xl leading-relaxed font-light">
+          <p className="text-lg md:text-xl leading-relaxed font-light">
             Our mission is simple: to provide a space where you can disconnect
             from the city's chaos and reconnect with your inner balance.
           </p>
         </div>
-        <div className="relative h-[300px] md:h-[400px]">
+        <div className="relative h-[300px] md:h-[400px] order-1 md:order-2">
           <img
             src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
             className="w-full h-full object-cover"
@@ -438,19 +444,19 @@ const AboutPage = () => (
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-mono text-sm text-[#0B1215]/70">
           <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-[#0B1215] rounded-full"></div>
+            <div className="w-2 h-2 bg-[#0B1215] rounded-full shrink-0"></div>
             Professional spa & wellness services only
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-[#0B1215] rounded-full"></div>
+            <div className="w-2 h-2 bg-[#0B1215] rounded-full shrink-0"></div>
             Services strictly follow wellness standards
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-[#0B1215] rounded-full"></div>
+            <div className="w-2 h-2 bg-[#0B1215] rounded-full shrink-0"></div>
             No explicit or adult services
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-[#0B1215] rounded-full"></div>
+            <div className="w-2 h-2 bg-[#0B1215] rounded-full shrink-0"></div>
             Safe, hygienic, and respectful environment
           </div>
         </div>
@@ -473,9 +479,9 @@ const FaqPage = () => {
           <div key={i} className="border-b border-[#0B1215]/10">
             <button
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              className="w-full py-6 md:py-8 flex justify-between items-center text-left hover:bg-white transition-colors"
+              className="w-full py-6 md:py-8 flex justify-between items-center text-left hover:bg-white transition-colors gap-4"
             >
-              <span className="text-xl md:text-2xl font-serif text-[#0B1215] pr-4">
+              <span className="text-lg md:text-2xl font-serif text-[#0B1215]">
                 {faq.q}
               </span>
               <ChevronDown
@@ -485,7 +491,7 @@ const FaqPage = () => {
             <div
               className={`overflow-hidden transition-all duration-500 ${openIndex === i ? "max-h-60 opacity-100 mb-8" : "max-h-0 opacity-0"}`}
             >
-              <p className="text-lg font-light text-[#0B1215]/70 max-w-3xl">
+              <p className="text-base md:text-lg font-light text-[#0B1215]/70 max-w-3xl">
                 {faq.a}
               </p>
             </div>
@@ -493,7 +499,7 @@ const FaqPage = () => {
         ))}
       </div>
 
-      <div className="mt-24 p-12 bg-[#0B1215] text-[#E0E5E5] text-center rounded-sm">
+      <div className="mt-24 p-8 md:p-12 bg-[#0B1215] text-[#E0E5E5] text-center rounded-sm">
         <h3 className="text-2xl font-serif mb-4">Still have questions?</h3>
         <p className="font-light mb-8 opacity-70">
           Our concierge is available to assist you instantly.
@@ -586,22 +592,22 @@ export default function BlueLeafSpa() {
         >
           BLUE LEAF
         </span>
-        <button onClick={() => setMenuOpen(true)}>
+        <button onClick={() => setMenuOpen(true)} className="p-2">
           <Menu size={24} />
         </button>
       </div>
 
       {/* FULL SCREEN MENU OVERLAY */}
       <div
-        className={`fixed inset-0 bg-[#0B1215] z-50 transition-all duration-700 ${menuOpen ? "translate-y-0" : "-translate-y-full"} flex items-center justify-center`}
+        className={`fixed inset-0 bg-[#0B1215] z-50 transition-all duration-700 ${menuOpen ? "translate-y-0" : "-translate-y-full"} flex items-center justify-center overflow-y-auto`}
       >
         <button
           onClick={() => setMenuOpen(false)}
-          className="absolute top-8 right-8 text-white hover:rotate-90 transition-transform duration-300"
+          className="absolute top-8 right-8 text-white hover:rotate-90 transition-transform duration-300 p-2"
         >
           <X size={32} />
         </button>
-        <div className="flex flex-col items-center gap-8 font-serif text-5xl md:text-7xl text-[#E0E5E5]">
+        <div className="flex flex-col items-center gap-8 font-serif text-5xl md:text-7xl text-[#E0E5E5] py-20">
           {["Home", "Menu", "About", "FAQ"].map((item) => (
             <button
               key={item}
