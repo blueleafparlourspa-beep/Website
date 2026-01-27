@@ -39,7 +39,7 @@ const SERVICES_DATA = [
     name: "Aroma Massage",
     category: "Massages",
     image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800&auto=format&fit=crop",
+      "https://serenitysf.com/wp-content/uploads/2024/07/aromatherapy-massage-1.jpg",
     description:
       "A holistic treatment with a profound impact on the body, mind, and spirit. Experience deep relaxation through the powerful combination of aromatic oils and massage. The treatment ends with a deeply soothing head massage.",
     prices: [
@@ -53,7 +53,7 @@ const SERVICES_DATA = [
     name: "Balinese Massage",
     category: "Massages",
     image:
-      "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=800&auto=format&fit=crop",
+      "https://thumbs.dreamstime.com/b/young-women-getting-back-massage-woman-salon-40464330.jpg",
     description:
       "Techniques include acupressure, skin rolling, firm and gentle stroking, and percussion. Deeply relaxes and revitalizes the body and mind. Benefits include increased flexibility and relief from muscle tension.",
     prices: [
@@ -96,7 +96,7 @@ const SERVICES_DATA = [
     name: "Candle Massage",
     category: "Massages",
     image:
-      "https://plus.unsplash.com/premium_photo-1661683296246-6e613be58c4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://thumbs.dreamstime.com/b/massage-women-spa-salon-girl-candles-background-treats-problem-back-relaxation-benefit-beauty-health-crop-bare-117648962.jpg",
     description:
       "Warm wax is dripped onto the body to create a gentler and more relaxing experience. The wax helps melt away muscle knots while providing a soothing sensation, ideal for anxiety.",
     prices: [
@@ -110,7 +110,7 @@ const SERVICES_DATA = [
     name: "Wine Massage",
     category: "Massages",
     image:
-      "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop",
+      "https://media.vyaparify.com/vcards/blogs/223568/service_1743607964.png",
     description:
       "Offers potential benefits such as enhanced skin texture, improved circulation, and antioxidant protection. Treatments include wine-based scrubs and creams to exfoliate and nourish.",
     prices: [
@@ -138,7 +138,7 @@ const SERVICES_DATA = [
     name: "Swedish Massage",
     category: "Massages",
     image:
-      "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=800&auto=format&fit=crop",
+      "https://thumbs.dreamstime.com/b/masseur-doing-massage-woman-body-women-spa-salon-beauty-treatment-concept-44619828.jpg",
     description:
       "Uses long, gliding strokes in the direction of blood flow toward the heart to improve circulation, reduce muscle tension, and promote deep relaxation.",
     prices: [
@@ -152,7 +152,7 @@ const SERVICES_DATA = [
     name: "Traditional Thai",
     category: "Massages",
     image:
-      "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=800&auto=format&fit=crop",
+      "https://static.vecteezy.com/system/resources/thumbnails/010/508/721/small/massage-and-spa-relaxing-treatment-of-office-syndrome-using-hot-stone-traditional-thai-massage-style-asain-female-masseuse-doing-massage-treat-back-pain-arm-pain-stress-for-woman-tired-from-work-photo.jpg",
     description:
       "A dry therapy combining yoga stretches, Shiatsu, and acupressure. Works on the body’s energy pathways and pressure points to restore balance.",
     prices: [
@@ -435,14 +435,9 @@ export default function ServicesPage() {
                       href={`tel:${PHONE_NUMBER}`}
                       className="flex-1 border border-teal-600 text-teal-700 py-2.5 rounded-lg font-medium text-sm flex items-center justify-center gap-2 hover:bg-teal-50 transition-colors"
                     >
-                      <Phone size={16} /> Book Now
+                      <Phone size={16} /> Book Session
                     </a>
-                    <a
-                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=I want to book ${service.name}`}
-                      className="bg-slate-900 text-white px-4 py-2.5 rounded-lg hover:bg-teal-700 transition-colors"
-                    >
-                      <MessageCircle size={16} />
-                    </a>
+
                   </div>
                 </div>
               </div>

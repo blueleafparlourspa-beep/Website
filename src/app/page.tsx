@@ -42,7 +42,7 @@ const SERVICES: Service[] = [
   {
     name: "Aroma Massage",
     image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800&auto=format&fit=crop",
+      "https://serenitysf.com/wp-content/uploads/2024/07/aromatherapy-massage-1.jpg",
     description:
       "Holistic treatment with aromatic oils to relieve stress from mind and body. Includes head massage and shower.",
     category: "Massages",
@@ -54,7 +54,7 @@ const SERVICES: Service[] = [
   {
     name: "Swedish Massage",
     image:
-      "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=800&auto=format&fit=crop",
+      "https://thumbs.dreamstime.com/b/masseur-doing-massage-woman-body-women-spa-salon-beauty-treatment-concept-44619828.jpg",
     description:
       "Long gliding strokes to improve circulation and reduce tension. A classic for relaxation.",
     category: "Massages",
@@ -66,7 +66,7 @@ const SERVICES: Service[] = [
   {
     name: "Balinese Massage",
     image:
-      "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=800&auto=format&fit=crop",
+      "https://thumbs.dreamstime.com/b/young-women-getting-back-massage-woman-salon-40464330.jpg",
     description:
       "Deep relaxation using acupressure, skin rolling, and essential oils. Increases flexibility.",
     category: "Massages",
@@ -78,7 +78,7 @@ const SERVICES: Service[] = [
   {
     name: "Deep Tissue Massage",
     image:
-      "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://img.freepik.com/premium-photo/beautiful-young-woman-enjoying-head-massage-spa-center_488220-74694.jpg?semt=ais_hybrid&w=740&q=80",
     description:
       "Focuses on deeper layers of muscle to release chronic tension. Ideal for physical ailments.",
     category: "Massages",
@@ -90,7 +90,7 @@ const SERVICES: Service[] = [
   {
     name: "Lomi Lomi Massage",
     image:
-      "https://images.unsplash.com/photo-1591343395082-e120087004b4?q=80&w=800&auto=format&fit=crop",
+      "https://img.freepik.com/free-photo/woman-spending-time-spa-getting-exfoliation-massage_23-2149871917.jpg?semt=ais_hybrid&w=740&q=80",
     description:
       "Traditional Hawaiian 'loving hands' massage using continuous, flowing strokes.",
     category: "Massages",
@@ -102,7 +102,7 @@ const SERVICES: Service[] = [
   {
     name: "Candle Massage",
     image:
-      "https://plus.unsplash.com/premium_photo-1661683296246-6e613be58c4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://thumbs.dreamstime.com/b/massage-women-spa-salon-girl-candles-background-treats-problem-back-relaxation-benefit-beauty-health-crop-bare-117648962.jpg",
     description:
       "Warm wax is dripped onto the body for a gentle, soothing experience. Ideal for anxiety.",
     category: "Massages",
@@ -114,7 +114,7 @@ const SERVICES: Service[] = [
   {
     name: "Wine Massage",
     image:
-      "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop", // Abstract luxury texture
+      "https://media.vyaparify.com/vcards/blogs/223568/service_1743607964.png", // Abstract luxury texture
     description:
       "Antioxidant-rich red wine based scrubs and creams to enhance skin texture.",
     category: "Massages",
@@ -126,7 +126,7 @@ const SERVICES: Service[] = [
   {
     name: "Traditional Thai Massage",
     image:
-      "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=800&auto=format&fit=crop",
+      "https://static.vecteezy.com/system/resources/thumbnails/010/508/721/small/massage-and-spa-relaxing-treatment-of-office-syndrome-using-hot-stone-traditional-thai-massage-style-asain-female-masseuse-doing-massage-treat-back-pain-arm-pain-stress-for-woman-tired-from-work-photo.jpg",
     description:
       "Dry therapy combining yoga stretches and acupressure. Focuses on energy pathways.",
     category: "Massages",
@@ -148,7 +148,7 @@ const SERVICES: Service[] = [
   {
     name: "Back Massage",
     image:
-      "https://images.unsplash.com/photo-1519824145371-296894a0daa9?q=80&w=800&auto=format&fit=crop",
+      "https://static.vecteezy.com/system/resources/thumbnails/070/469/870/small/relaxing-massage-session-at-a-wellness-spa-with-calming-atmosphere-photo.jpeg",
     category: "Therapies",
     prices: [{ duration: "30 Min", price: 1500 }],
   },
@@ -163,7 +163,7 @@ const SERVICES: Service[] = [
   {
     name: "Steam Bath",
     image:
-      "https://plus.unsplash.com/premium_photo-1661319103622-991148798a57?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://media.gettyimages.com/id/2021357135/photo/young-pretty-woman-relaxing-in-turkish-hammam.jpg?s=612x612&w=0&k=20&c=xK-Z9kREV4Fqat9Edx1cj5H_3mwfbmGGxijtdUjb0EM=",
     description: "Detoxify and open pores in our humid, heated steam room.",
     category: "Scrubs & Steam",
     prices: [{ duration: "20 Min", price: 500 }],
@@ -315,8 +315,7 @@ const Hero = () => (
         </h1>
 
         <p className="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
-          Relax, rejuvenate, and restore your balance with certified therapists
-          in a sanctuary of calm.
+          Relax, rejuvenate, and restore your balance with certified female south and north therapist
         </p>
 
         {/* Offer Card */}
@@ -692,7 +691,7 @@ export default function LandingPage() {
     <main className="font-sans antialiased text-slate-900 bg-white selection:bg-teal-100 selection:text-teal-900">
       <Navbar />
       <Hero />
-      <Features />
+      {/* <Features /> */}
       <Services />
 
       <section id="faq" className="py-24 bg-white relative overflow-hidden">
