@@ -523,9 +523,9 @@ const Services = () => (
           * All prices are subject to change. 20% Discount applicable on final
           bill.
         </p>
-        <button className="inline-flex items-center gap-2 text-teal-700 font-bold uppercase tracking-widest text-sm hover:gap-4 transition-all">
+        {/* <button className="inline-flex items-center gap-2 text-teal-700 font-bold uppercase tracking-widest text-sm hover:gap-4 transition-all">
           Download Full Menu <ArrowRight size={16} />
-        </button>
+        </button> */}
       </div>
     </div>
   </section>
