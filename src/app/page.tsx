@@ -561,7 +561,7 @@ const StickyMobileCTA = () => (
       <div className="flex items-center gap-1.5">
         <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
         <span className="text-xs font-bold text-teal-900 uppercase tracking-wider">
-          Slots filling fast
+          Limited slots available
         </span>
       </div>
       <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-100">
