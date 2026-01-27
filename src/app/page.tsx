@@ -272,9 +272,12 @@ const Navbar = () => {
               {item.title}
             </a>
           ))}
-          <button className="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-teal-900/20 text-sm font-medium">
+          <Link
+            href="/contact"
+            className="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-teal-900/20 text-sm font-medium"
+          >
             Book Appointment
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
