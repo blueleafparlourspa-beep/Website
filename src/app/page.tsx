@@ -2,117 +2,183 @@
 
 import React, { useState, useEffect } from "react";
 import {
-  Leaf,
-  ArrowUpRight,
-  Menu,
-  X,
   Phone,
   MessageCircle,
   Clock,
-  ShieldCheck,
-  Sparkles,
   Star,
+  ShieldCheck,
+  Leaf,
   ChevronDown,
+  ChevronUp,
+  Menu,
+  X,
+  ArrowRight,
 } from "lucide-react";
 
 /**
- * BLUE LEAF PARLOUR & SPA - "SILENT LUXURY" EDITION (COMPLETE)
- * * DESIGN LANGUAGE:
- * - Typography: Gigantic Serif (Playfair) vs Micro Mono (Tech feel).
- * - Layout: Asymmetrical, Art Gallery style.
- * - Colors: Midnight Slate (#0B1215) & Eucalyptus Mist (#E0E5E5).
- * - Vibe: Architectural, Calm, Expensive.
+ * =========================================
+ * CONFIGURATION & DATA
+ * =========================================
  */
 
-// --- FULL DATA FROM PDF ---
+const COMPANY_NAME = "Blue Leaf Parlour & Spa";
+const WHATSAPP_NUMBER = "919876543210"; // Replace with actual
+const PHONE_NUMBER = "+91 98765 43210"; // Replace with actual
 
-const MASSAGES = [
-  {
-    title: "Signature Four Hands",
-    desc: "Performed by two therapists working in unison to unravel knots and stress. A synchronized approach offering a doubled dose of therapeutic touch.",
-    time: "60 / 90 min",
-    price: "5,000 / 6,000",
-    image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    title: "Aroma Massage",
-    desc: "A holistic treatment using aromatic oils to deeply relax body, mind, and spirit. Includes a soothing head massage to relieve stress.",
-    time: "60 / 90 min",
-    price: "2,500 / 3,000",
-    image:
-      "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    title: "Swedish Massage",
-    desc: "Long, gliding strokes in the direction of blood flow. Improves circulation, reduces tension, and promotes deep relaxation. Includes shower.",
-    time: "60 / 90 min",
-    price: "2,500 / 3,000",
-    image:
-      "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1000&auto=format&fit=crop",
-  },
-  {
-    title: "Balinese Massage",
-    desc: "Techniques include acupressure, skin rolling, and flicking with essential oils. Revitalizes the body and balances the energy system.",
-    time: "60 / 90 min",
-    price: "2,500 / 3,000",
-    image:
-      "https://images.unsplash.com/photo-1591343395082-e2158405b723?q=80&w=2000&auto=format&fit=crop",
-  },
-  {
-    title: "Deep Tissue",
-    desc: "Targets deeper layers of muscle, tendons, and fascia using slow, firm strokes. Ideal for chronic muscle tension and physical ailments.",
-    time: "60 / 90 min",
-    price: "3,000 / 4,000",
-    image:
-      "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1000&auto=format&fit=crop",
-  },
-  {
-    title: "Lomi Lomi",
-    desc: "Traditional Hawaiian 'loving hands' massage. Uses continuous, flowing strokes that work gently yet deeply into the muscles.",
-    time: "60 / 90 min",
-    price: "2,500 / 3,500",
-    image:
-      "https://images.unsplash.com/photo-1542848284-8afa78a08ccb?q=80&w=2000&auto=format&fit=crop",
-  },
-  {
-    title: "Candle Massage",
-    desc: "Warm wax is dripped onto the body to create a gentle, melting sensation. Perfect for melting away muscle knots and anxiety.",
-    time: "60 / 90 min",
-    price: "3,500 / 4,500",
-    image:
-      "https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    title: "Wine Massage",
-    desc: "Red wine-based scrubs and creams. Offers antioxidant protection, enhanced skin texture, and improved circulation.",
-    time: "60 / 90 min",
-    price: "3,500 / 5,000",
-    image:
-      "https://images.unsplash.com/photo-1510733485939-705d529b5354?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    title: "Traditional Thai",
-    desc: "Dry therapy combining yoga stretches, Shiatsu, and acupressure. Focuses on energy pathways and chakras. Includes foot ritual.",
-    time: "60 / 90 min",
-    price: "3,000 / 4,000",
-    image:
-      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop",
-  },
-];
+// Interface for Service Data
+interface Service {
+  name: string;
+  image: string; // New image property
+  description?: string;
+  prices: { duration: string; price: number }[];
+  category: string;
+  highlight?: boolean;
+}
 
-const EXPRESS_THERAPIES = [
-  { title: "Head Massage", time: "30 Min", price: "1,000" },
-  { title: "Back Massage", time: "30 Min", price: "1,500" },
-  { title: "Back Body Scrub", time: "30 Min", price: "1,800" },
-  { title: "Potli Massage", time: "30 Min", price: "1,500" },
-  { title: "Hot Rock Salt", time: "30 Min", price: "1,500" },
-  { title: "Foot Massage", time: "30 Min", price: "1,500" },
-  { title: "Steam Bath", time: "20 Min", price: "500" },
-];
-
-const BODY_RITUALS = [
-  { title: "Full Body Scrub", time: "60 Min", price: "3,500" },
+// Data Array with Unsplash Images
+const SERVICES: Service[] = [
+  // --- Massages ---
+  {
+    name: "Aroma Massage",
+    image:
+      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800&auto=format&fit=crop",
+    description:
+      "Holistic treatment with aromatic oils to relieve stress from mind and body. Includes head massage and shower.",
+    category: "Massages",
+    prices: [
+      { duration: "60 Min", price: 2500 },
+      { duration: "90 Min", price: 3000 },
+    ],
+  },
+  {
+    name: "Swedish Massage",
+    image:
+      "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=800&auto=format&fit=crop",
+    description:
+      "Long gliding strokes to improve circulation and reduce tension. A classic for relaxation.",
+    category: "Massages",
+    prices: [
+      { duration: "60 Min", price: 2500 },
+      { duration: "90 Min", price: 3500 },
+    ],
+  },
+  {
+    name: "Balinese Massage",
+    image:
+      "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=800&auto=format&fit=crop",
+    description:
+      "Deep relaxation using acupressure, skin rolling, and essential oils. Increases flexibility.",
+    category: "Massages",
+    prices: [
+      { duration: "60 Min", price: 2500 },
+      { duration: "90 Min", price: 3000 },
+    ],
+  },
+  {
+    name: "Deep Tissue Massage",
+    image:
+      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=800&auto=format&fit=crop",
+    description:
+      "Focuses on deeper layers of muscle to release chronic tension. Ideal for physical ailments.",
+    category: "Massages",
+    prices: [
+      { duration: "60 Min", price: 3000 },
+      { duration: "90 Min", price: 4000 },
+    ],
+  },
+  {
+    name: "Lomi Lomi Massage",
+    image:
+      "https://images.unsplash.com/photo-1591343395082-e120087004b4?q=80&w=800&auto=format&fit=crop",
+    description:
+      "Traditional Hawaiian 'loving hands' massage using continuous, flowing strokes.",
+    category: "Massages",
+    prices: [
+      { duration: "60 Min", price: 2500 },
+      { duration: "90 Min", price: 3500 },
+    ],
+  },
+  {
+    name: "Candle Massage",
+    image:
+      "https://images.unsplash.com/photo-1602872030219-aa26a76b92df?q=80&w=800&auto=format&fit=crop",
+    description:
+      "Warm wax is dripped onto the body for a gentle, soothing experience. Ideal for anxiety.",
+    category: "Massages",
+    prices: [
+      { duration: "60 Min", price: 3500 },
+      { duration: "90 Min", price: 4500 },
+    ],
+  },
+  {
+    name: "Wine Massage",
+    image:
+      "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop", // Abstract luxury texture
+    description:
+      "Antioxidant-rich red wine based scrubs and creams to enhance skin texture.",
+    category: "Massages",
+    prices: [
+      { duration: "60 Min", price: 3500 },
+      { duration: "90 Min", price: 5000 },
+    ],
+  },
+  {
+    name: "Traditional Thai Massage",
+    image:
+      "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=800&auto=format&fit=crop",
+    description:
+      "Dry therapy combining yoga stretches and acupressure. Focuses on energy pathways.",
+    category: "Massages",
+    prices: [
+      { duration: "60 Min", price: 3000 },
+      { duration: "90 Min", price: 4000 },
+    ],
+  },
+  {
+    name: "Signature / Four Hands",
+    image:
+      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop",
+    description:
+      "Two therapists working in unison. The ultimate luxury experience.",
+    category: "Massages",
+    highlight: true,
+    prices: [
+      { duration: "60 Min", price: 5000 },
+      { duration: "90 Min", price: 6000 },
+    ],
+  },
+  // --- Therapies & Others ---
+  {
+    name: "Head Massage",
+    image:
+      "https://images.unsplash.com/photo-1512290923902-8a92e08040b6?q=80&w=800&auto=format&fit=crop",
+    description: "Relieves stress, migraine pain, and improves circulation.",
+    category: "Therapies",
+    prices: [{ duration: "30 Min", price: 1000 }],
+  },
+  {
+    name: "Back Massage",
+    image:
+      "https://images.unsplash.com/photo-1519824145371-296894a0daa9?q=80&w=800&auto=format&fit=crop",
+    category: "Therapies",
+    prices: [{ duration: "30 Min", price: 1500 }],
+  },
+  // --- Scrubs & Steam ---
+  {
+    name: "Full Body Scrub",
+    image:
+      "https://images.unsplash.com/photo-1552693673-1bf958298935?q=80&w=800&auto=format&fit=crop",
+    category: "Scrubs & Steam",
+    prices: [{ duration: "60 Min", price: 3500 }],
+  },
+  {
+    name: "Steam Bath",
+    image:
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop",
+    description: "Detoxify and open pores in our humid, heated steam room.",
+    category: "Scrubs & Steam",
+    prices: [{ duration: "20 Min", price: 500 }],
+  },
 ];
 
 const FAQS = [
@@ -121,7 +187,7 @@ const FAQS = [
     a: "Yes, all our therapists are professionally trained and experienced.",
   },
   {
-    q: "Are prices fixed or negotiable?",
+    q: "Are prices fixed?",
     a: "All prices are fixed and transparent. No hidden charges.",
   },
   {
@@ -130,596 +196,548 @@ const FAQS = [
   },
   {
     q: "Do you accept walk-ins?",
-    a: "Yes, walk-ins are welcome, but prior booking is recommended.",
-  },
-  {
-    q: "Is the 20% discount available on all services?",
-    a: "Yes, the discount applies to all services booked today.",
+    a: "Yes, walk-ins are welcome, but prior booking is recommended to secure your slot.",
   },
 ];
 
-const WHY_CHOOSE_US = [
-  "Certified & professionally trained therapists",
-  "Private, clean & hygienic spa rooms",
-  "Premium oils & authentic techniques",
-  "Transparent pricing - no hidden charges",
-  "Calm, peaceful & luxurious ambience",
-];
+/**
+ * =========================================
+ * COMPONENTS
+ * =========================================
+ */
 
-// --- COMPONENTS ---
+const SectionHeading = ({
+  children,
+  subtitle,
+  light = false,
+}: {
+  children: React.ReactNode;
+  subtitle?: string;
+  light?: boolean;
+}) => (
+  <div className="mb-14 text-center">
+    {subtitle && (
+      <span
+        className={`${light ? "text-teal-400" : "text-teal-600"} font-medium tracking-widest text-sm uppercase mb-3 block`}
+      >
+        {subtitle}
+      </span>
+    )}
+    <h2
+      className={`text-4xl md:text-5xl font-serif ${light ? "text-white" : "text-slate-800"}`}
+    >
+      {children}
+    </h2>
+    <div
+      className={`w-24 h-1 ${light ? "bg-teal-400" : "bg-teal-600"} mx-auto mt-6 rounded-full`}
+    />
+  </div>
+);
 
-const ScrollProgress = () => {
-  const [width, setWidth] = useState(0);
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
-    const handleScroll = () => {
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      setWidth((window.scrollY / total) * 100);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
-    <div
-      className="fixed top-0 left-0 h-1 bg-[#0B1215] z-50 transition-all duration-100 ease-out"
-      style={{ width: `${width}%` }}
-    />
+    <nav
+      className={`fixed w-full z-50 transition-all duration-500 border-b border-transparent ${scrolled ? "bg-white/95 backdrop-blur-md border-slate-100 py-3 shadow-sm" : "bg-transparent py-6"}`}
+    >
+      <div className="container mx-auto px-6 flex justify-between items-center">
+        <div
+          className={`font-serif text-2xl font-bold tracking-tight ${scrolled ? "text-teal-900" : "text-teal-900"} flex items-center gap-2`}
+        >
+          <Leaf className="w-6 h-6 text-teal-600" />
+          BLUE LEAF
+        </div>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-8">
+          {["About", "Services", "FAQ"].map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="text-slate-600 hover:text-teal-700 font-medium text-sm tracking-wide transition-colors"
+            >
+              {item}
+            </a>
+          ))}
+          <button className="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-teal-900/20 text-sm font-medium">
+            Book Appointment
+          </button>
+        </div>
+
+        {/* Mobile Toggle */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden text-teal-900"
+        >
+          {isOpen ? <X /> : <Menu />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="absolute top-full left-0 w-full bg-white shadow-xl p-6 md:hidden flex flex-col space-y-4 border-t border-slate-100">
+          <a
+            href="#about"
+            onClick={() => setIsOpen(false)}
+            className="text-lg font-serif text-slate-800"
+          >
+            About
+          </a>
+          <a
+            href="#services"
+            onClick={() => setIsOpen(false)}
+            className="text-lg font-serif text-slate-800"
+          >
+            Services
+          </a>
+          <a
+            href="#faq"
+            onClick={() => setIsOpen(false)}
+            className="text-lg font-serif text-slate-800"
+          >
+            FAQ
+          </a>
+        </div>
+      )}
+    </nav>
   );
 };
 
-const MagneticButton = ({ children, className, onClick }: any) => (
-  <button
-    onClick={onClick}
-    className={`relative group overflow-hidden rounded-full border border-[#0B1215] px-6 py-3 md:px-8 md:py-4 font-mono text-xs uppercase tracking-widest transition-all duration-500 hover:bg-[#0B1215] hover:text-white active:scale-95 ${className}`}
-  >
-    <span className="relative z-10 flex items-center gap-2">{children}</span>
-  </button>
-);
+const Hero = () => (
+  <section className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-[#F8FAFC]">
+    {/* Abstract Background Shapes */}
+    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-teal-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+    <div className="absolute bottom-0 left-0 w-[700px] h-[700px] bg-amber-50/60 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />
 
-const ServiceRow = ({ service, index }: any) => (
-  <div className="group relative border-t border-[#0B1215]/10 py-8 md:py-12 transition-all duration-500 hover:bg-[#F5F5F0]">
-    <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-baseline justify-between gap-6 z-10 relative">
-      <div className="w-full md:w-1/4">
-        <span className="font-mono text-xs text-[#0B1215]/40 mb-2 block">
-          0{index + 1}
-        </span>
-        <h3 className="text-3xl md:text-4xl font-serif text-[#0B1215] group-hover:translate-x-4 transition-transform duration-500">
-          {service.title}
-        </h3>
-        {/* Mobile Image: Visible only on small screens */}
-        <div className="mt-4 md:hidden w-full h-48 overflow-hidden rounded-sm">
-          <img
-            src={service.image}
-            alt={service.title}
-            className="w-full h-full object-cover grayscale opacity-80"
-          />
-        </div>
-      </div>
-      <div className="w-full md:w-1/3">
-        <p className="text-[#0B1215]/70 font-light leading-relaxed max-w-md text-sm md:text-base">
-          {service.desc}
-        </p>
-      </div>
-      {/* Responsive Price Grid: Stacked on mobile, flex on desktop */}
-      <div className="w-full md:w-1/4 grid grid-cols-2 md:flex md:items-end md:justify-end gap-4 md:gap-12 font-mono text-sm border-t md:border-t-0 border-[#0B1215]/10 pt-4 md:pt-0 mt-4 md:mt-0">
-        <div className="md:text-right">
-          <span className="block text-[#0B1215]/40 text-xs mb-1">Time</span>
-          <span className="text-[#0B1215]">{service.time}</span>
-        </div>
-        <div className="md:text-right">
-          <span className="block text-[#0B1215]/40 text-xs mb-1">INR</span>
-          <span className="text-xl font-serif text-[#0B1215]">
-            ₹{service.price}
+    <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="text-center lg:text-left">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 border border-teal-200 rounded-full bg-white/50 backdrop-blur-sm">
+          <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
+          <span className="text-teal-800 font-bold text-xs tracking-widest uppercase">
+            Authentic Thai Spa
           </span>
         </div>
-      </div>
-    </div>
 
-    {/* Desktop Hover Image Reveal: Hidden on mobile */}
-    <div className="absolute inset-y-0 right-[15%] w-[250px] opacity-0 scale-90 group-hover:opacity-10 group-hover:scale-100 transition-all duration-700 pointer-events-none mix-blend-multiply hidden md:block">
-      <img
-        src={service.image}
-        alt=""
-        className="w-full h-full object-cover grayscale"
-      />
-    </div>
-  </div>
-);
-
-// --- PAGES ---
-
-const HomePage = ({ setPage }: any) => (
-  <>
-    {/* HERO */}
-    <section className="relative min-h-screen flex flex-col justify-between p-6 pt-24 md:p-12 lg:p-24 overflow-hidden animate-fade-in">
-      <div className="flex justify-between items-start">
-        <div className="font-mono text-xs uppercase tracking-widest max-w-[200px]">
-          Bengaluru, India
-          <br />
-          12.9716° N, 77.5946° E
-        </div>
-        <div className="hidden md:block font-mono text-xs uppercase tracking-widest text-right">
-          Authentic Thai
-          <br />
-          Luxury Wellness
-        </div>
-      </div>
-
-      <div className="relative z-10 mt-8 md:mt-0">
-        <h1 className="text-[14vw] leading-[0.85] font-serif font-medium tracking-tighter text-[#0B1215]">
-          BLUE <span className="italic font-light">LEAF</span>
+        <h1 className="text-5xl md:text-7xl font-serif text-slate-900 leading-[1.1] mb-6">
+          Ancient wellness, <br />
+          <span className="italic text-teal-700">modern luxury.</span>
         </h1>
-        <div className="h-px w-full bg-[#0B1215] mt-4 mb-8"></div>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pb-12 md:pb-0">
-          <p className="max-w-md text-lg md:text-xl font-light leading-relaxed">
-            Ancient wellness traditions meeting modern architectural luxury.
-            Relax, rejuvenate, and restore your balance.
-          </p>
-          <div
-            className="flex items-center gap-4 cursor-pointer mt-4 md:mt-0"
-            onClick={() => setPage("menu")}
-          >
-            <MagneticButton className="border-[#0B1215]">
-              Explore Menu
-            </MagneticButton>
-          </div>
-        </div>
-      </div>
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] rounded-full border border-[#0B1215]/5 z-0 animate-[spin_60s_linear_infinite] pointer-events-none"></div>
-    </section>
+        <p className="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
+          Relax, rejuvenate, and restore your balance with certified therapists
+          in a sanctuary of calm.
+        </p>
 
-    {/* IMAGE BREAK */}
-    <div className="w-full h-[50vh] md:h-[60vh] overflow-hidden relative">
-      <img
-        src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-        alt="Spa"
-      />
-    </div>
-
-    {/* TEASER */}
-    <section className="py-24 md:py-32 px-6 md:px-24 max-w-[1600px] mx-auto">
-      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-        <div className="md:w-1/3">
-          <h2 className="text-3xl md:text-4xl font-serif">The Philosophy</h2>
-        </div>
-        <div className="md:w-2/3">
-          <p className="text-lg md:text-xl font-light leading-relaxed mb-8">
-            Blue Leaf is not just a spa. It is a sanctuary for the soul. We
-            believe in the healing power of touch, the purity of organic oils,
-            and the luxury of silence.
-          </p>
-          <button
-            onClick={() => setPage("about")}
-            className="text-[#0B1215] border-b border-[#0B1215] pb-1 font-mono text-xs uppercase tracking-widest hover:opacity-50"
-          >
-            Read More
-          </button>
-        </div>
-      </div>
-    </section>
-  </>
-);
-
-const MenuPage = () => (
-  <div className="pt-24 md:pt-32 min-h-screen animate-fade-in bg-white">
-    <div className="px-6 md:px-24 mb-12 md:mb-16">
-      {/* Title scales responsively but caps at a readable max size on desktop */}
-      <h2 className="text-[14vw] md:text-8xl lg:text-[120px] font-serif text-[#0B1215] leading-none opacity-10">
-        MENU
-      </h2>
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mt-[-4vw] md:mt-[-30px]">
-        <h1 className="text-4xl md:text-6xl font-serif text-[#0B1215]">
-          Bodywork
-        </h1>
-        <span className="font-mono text-xs uppercase tracking-widest mt-2 md:mt-0">
-          Full Service List
-        </span>
-      </div>
-    </div>
-
-    {/* Main Massages */}
-    <div className="mb-12 md:mb-24">
-      {MASSAGES.map((service, index) => (
-        <ServiceRow key={index} service={service} index={index} />
-      ))}
-    </div>
-
-    {/* Express & Rituals */}
-    <div className="bg-[#E0E5E5] py-16 md:py-24 px-6 md:px-24">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
-        {/* Express */}
-        <div>
-          <h3 className="text-3xl font-serif mb-8 md:mb-12 flex items-center gap-4">
-            <Clock className="text-[#0B1215]/40" /> Express Therapies
-          </h3>
-          <div className="space-y-6">
-            {EXPRESS_THERAPIES.map((item, i) => (
-              <div
-                key={i}
-                className="flex justify-between items-center border-b border-[#0B1215]/10 pb-4 group hover:pl-4 transition-all"
-              >
-                <div>
-                  <h4 className="font-serif text-lg md:text-xl">
-                    {item.title}
-                  </h4>
-                  <span className="text-xs font-mono text-[#0B1215]/50">
-                    {item.time}
-                  </span>
-                </div>
-                <span className="font-serif text-lg whitespace-nowrap">
-                  ₹{item.price}
-                </span>
+        {/* Offer Card */}
+        <div className="bg-white p-1 rounded-2xl shadow-xl shadow-teal-900/5 border border-slate-100 inline-block w-full max-w-md">
+          <div className="bg-slate-50 border border-dashed border-slate-200 rounded-xl p-6 relative overflow-hidden group">
+            <div className="absolute -right-6 -top-6 w-20 h-20 bg-teal-100 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 text-teal-700 font-bold tracking-wider text-xs uppercase mb-2">
+                <Star className="fill-current w-3 h-3" /> Today's Special Offer
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Rituals */}
-        <div>
-          <h3 className="text-3xl font-serif mb-8 md:mb-12 flex items-center gap-4">
-            <Sparkles className="text-[#0B1215]/40" /> Body Rituals
-          </h3>
-          <div className="space-y-6">
-            {BODY_RITUALS.map((item, i) => (
-              <div
-                key={i}
-                className="flex justify-between items-center border-b border-[#0B1215]/10 pb-4 group hover:pl-4 transition-all"
-              >
-                <div>
-                  <h4 className="font-serif text-lg md:text-xl">
-                    {item.title}
-                  </h4>
-                  <span className="text-xs font-mono text-[#0B1215]/50">
-                    {item.time}
-                  </span>
-                </div>
-                <span className="font-serif text-lg whitespace-nowrap">
-                  ₹{item.price}
+              <div className="flex items-baseline gap-2 mb-4">
+                <span className="text-4xl font-serif text-slate-900">
+                  20% OFF
                 </span>
+                <span className="text-slate-500 text-sm">on all bookings</span>
               </div>
-            ))}
-            <div className="mt-12 p-8 bg-[#0B1215] text-[#E0E5E5]">
-              <h4 className="font-serif text-2xl mb-4">Today's Privilege</h4>
-              <p className="font-light opacity-80 mb-6">
-                Receive a flat 20% discount on all therapies booked for today.
-              </p>
-              <div className="font-mono text-xs uppercase tracking-widest border border-[#E0E5E5]/30 inline-block px-4 py-2">
-                Code: TODAY20
+              <div className="flex gap-2">
+                <button className="flex-1 bg-slate-900 text-white py-3 rounded-lg font-medium text-sm flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
+                  <Phone size={16} /> Call Now
+                </button>
+                <button className="flex-1 bg-green-600 text-white py-3 rounded-lg font-medium text-sm flex items-center justify-center gap-2 hover:bg-green-700 transition-colors">
+                  <MessageCircle size={16} /> WhatsApp
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-);
 
-const AboutPage = () => (
-  <div className="pt-24 md:pt-32 min-h-screen animate-fade-in px-6 md:px-24">
-    <div className="max-w-[1200px] mx-auto">
-      <h1 className="text-5xl md:text-8xl font-serif mb-12 md:mb-16 text-[#0B1215]">
-        The Sanctuary
-      </h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-24">
-        <div className="order-2 md:order-1">
-          <p className="text-lg md:text-xl leading-relaxed font-light mb-8">
-            Welcome to Blue Leaf Parlour & Spa. We stand at the intersection of
-            ancient Thai wellness traditions and modern, hygienic luxury.
-          </p>
-          <p className="text-lg md:text-xl leading-relaxed font-light">
-            Our mission is simple: to provide a space where you can disconnect
-            from the city's chaos and reconnect with your inner balance.
-          </p>
-        </div>
-        <div className="relative h-[300px] md:h-[400px] order-1 md:order-2">
+      {/* Hero Image Collage */}
+      <div className="hidden lg:block relative h-[600px]">
+        <div className="absolute top-10 right-10 w-64 h-80 rounded-2xl overflow-hidden shadow-2xl rotate-3 border-4 border-white z-20">
           <img
-            src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+            src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=600&auto=format&fit=crop"
             className="w-full h-full object-cover"
-            alt="Oils"
+            alt="Massage"
           />
         </div>
+        <div className="absolute bottom-20 left-10 w-64 h-80 rounded-2xl overflow-hidden shadow-2xl -rotate-3 border-4 border-white z-10">
+          <img
+            src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=600&auto=format&fit=crop"
+            className="w-full h-full object-cover"
+            alt="Spa"
+          />
+        </div>
+        {/* Decorative circle */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-slate-200 rounded-full"></div>
       </div>
+    </div>
+  </section>
+);
 
-      <div className="mb-24">
-        <h2 className="text-3xl font-serif mb-12 border-b border-[#0B1215] pb-4 inline-block">
-          Why Choose Blue Leaf?
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {WHY_CHOOSE_US.map((item, i) => (
-            <div key={i} className="flex gap-4">
-              <Star className="shrink-0 text-[#0B1215]/40" />
-              <p className="font-light">{item}</p>
+const Features = () => (
+  <section id="about" className="py-24 bg-white">
+    <div className="container mx-auto px-6">
+      <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="order-2 md:order-1">
+          <SectionHeading subtitle="Why Choose Us">
+            The Blue Leaf Standard
+          </SectionHeading>
+          <div className="space-y-8 mt-8">
+            {[
+              {
+                title: "Certified Therapists",
+                desc: "Professionally trained hands you can trust.",
+              },
+              {
+                title: "Private & Hygienic",
+                desc: "Clean, private spa rooms with premium amenities.",
+              },
+              {
+                title: "Transparent Pricing",
+                desc: "What you see is what you pay. No hidden costs.",
+              },
+            ].map((item, idx) => (
+              <div key={idx} className="flex gap-5 group">
+                <div className="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0 group-hover:bg-teal-600 group-hover:text-white transition-all duration-300">
+                  <ShieldCheck size={24} />
+                </div>
+                <div>
+                  <h4 className="text-xl font-serif text-slate-800 mb-2 group-hover:text-teal-700 transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="text-slate-500 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="relative order-1 md:order-2">
+          <div className="aspect-[4/5] rounded-3xl overflow-hidden relative shadow-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop"
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              alt="Spa Interior"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+            <div className="absolute bottom-8 left-8 text-white">
+              <p className="font-serif text-2xl">"Peace is the new luxury."</p>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* COMPLIANCE SECTION - CRITICAL FROM PDF */}
-      <div className="bg-[#F5F5F0] p-8 md:p-12 border border-[#0B1215]/10 mb-24">
-        <div className="flex items-center gap-4 mb-8">
-          <ShieldCheck size={32} className="text-[#0B1215]" />
-          <h3 className="text-2xl font-serif">Code of Ethics</h3>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-mono text-sm text-[#0B1215]/70">
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-[#0B1215] rounded-full shrink-0"></div>
-            Professional spa & wellness services only
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-[#0B1215] rounded-full shrink-0"></div>
-            Services strictly follow wellness standards
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-[#0B1215] rounded-full shrink-0"></div>
-            No explicit or adult services
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-[#0B1215] rounded-full shrink-0"></div>
-            Safe, hygienic, and respectful environment
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 );
 
-const FaqPage = () => {
-  const [openIndex, setOpenIndex] = useState<any>(null);
+const ServiceCard = ({ service }: { service: Service }) => (
+  <div
+    className={`group relative rounded-2xl overflow-hidden transition-all duration-300 border bg-white flex flex-col h-full ${service.highlight ? "border-teal-900 shadow-2xl ring-4 ring-teal-50 md:-mt-4 md:mb-4 z-10" : "border-slate-100 hover:shadow-xl hover:-translate-y-1"}`}
+  >
+    {/* Image Section */}
+    <div className="relative h-56 overflow-hidden">
+      <img
+        src={service.image}
+        alt={service.name}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
 
-  return (
-    <div className="pt-24 md:pt-32 min-h-screen animate-fade-in px-6 md:px-24 max-w-[1200px] mx-auto">
-      <h1 className="text-5xl md:text-8xl font-serif mb-12 md:mb-16 text-[#0B1215]">
-        Queries
-      </h1>
+      {service.highlight && (
+        <div className="absolute top-4 right-4 bg-amber-400 text-teal-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm z-10">
+          Most Recommended
+        </div>
+      )}
 
-      <div className="space-y-0 border-t border-[#0B1215]/10">
-        {FAQS.map((faq, i) => (
-          <div key={i} className="border-b border-[#0B1215]/10">
-            <button
-              onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              className="w-full py-6 md:py-8 flex justify-between items-center text-left hover:bg-white transition-colors gap-4"
-            >
-              <span className="text-lg md:text-2xl font-serif text-[#0B1215]">
-                {faq.q}
-              </span>
-              <ChevronDown
-                className={`shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`}
+      {/* Category Badge */}
+      <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur text-slate-800 text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wide">
+        {service.category}
+      </div>
+    </div>
+
+    {/* Content Section */}
+    <div
+      className={`p-6 md:p-8 flex-1 flex flex-col ${service.highlight ? "bg-teal-900 text-white" : "bg-white"}`}
+    >
+      <div className="flex justify-between items-start mb-4">
+        <h3
+          className={`text-2xl font-serif ${service.highlight ? "text-white" : "text-slate-800"}`}
+        >
+          {service.name}
+        </h3>
+      </div>
+
+      {service.description && (
+        <p
+          className={`text-sm mb-6 leading-relaxed flex-1 ${service.highlight ? "text-teal-100" : "text-slate-500"}`}
+        >
+          {service.description}
+        </p>
+      )}
+
+      <div
+        className={`space-y-3 pt-6 border-t mt-auto ${service.highlight ? "border-teal-800" : "border-slate-100"}`}
+      >
+        {service.prices.map((price, idx) => (
+          <div key={idx} className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <Clock
+                size={14}
+                className={
+                  service.highlight ? "text-teal-400" : "text-slate-400"
+                }
               />
-            </button>
-            <div
-              className={`overflow-hidden transition-all duration-500 ${openIndex === i ? "max-h-60 opacity-100 mb-8" : "max-h-0 opacity-0"}`}
-            >
-              <p className="text-base md:text-lg font-light text-[#0B1215]/70 max-w-3xl">
-                {faq.a}
-              </p>
+              <span
+                className={`text-sm ${service.highlight ? "text-teal-50" : "text-slate-500"}`}
+              >
+                {price.duration}
+              </span>
             </div>
+            <span
+              className={`font-semibold text-lg ${service.highlight ? "text-white" : "text-slate-900"}`}
+            >
+              ₹{price.price.toLocaleString()}
+            </span>
           </div>
         ))}
       </div>
 
-      <div className="mt-24 p-8 md:p-12 bg-[#0B1215] text-[#E0E5E5] text-center rounded-sm">
-        <h3 className="text-2xl font-serif mb-4">Still have questions?</h3>
-        <p className="font-light mb-8 opacity-70">
-          Our concierge is available to assist you instantly.
+      <button
+        className={`w-full mt-6 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 group-hover:gap-3 ${service.highlight ? "bg-white text-teal-900 hover:bg-teal-50" : "bg-slate-900 text-white hover:bg-teal-700"}`}
+      >
+        Book Session <ArrowRight size={16} />
+      </button>
+    </div>
+  </div>
+);
+
+const Services = () => (
+  <section id="services" className="py-24 bg-slate-50">
+    <div className="container mx-auto px-6">
+      <SectionHeading subtitle="Our Treatments">
+        Menu of Services
+      </SectionHeading>
+
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+        {SERVICES.map((service, idx) => (
+          <ServiceCard key={idx} service={service} />
+        ))}
+      </div>
+
+      <div className="mt-16 text-center">
+        <p className="text-slate-500 text-sm mb-6">
+          * All prices are subject to change. 20% Discount applicable on final
+          bill.
         </p>
-        <div className="flex justify-center gap-6">
-          <button
-            onClick={() => window.open("tel:+919876543210")}
-            className="border-b border-[#E0E5E5] pb-1 hover:opacity-50"
-          >
-            Call Us
-          </button>
-          <button
-            onClick={() => window.open("https://wa.me/919876543210")}
-            className="border-b border-[#E0E5E5] pb-1 hover:opacity-50"
-          >
-            WhatsApp
-          </button>
-        </div>
+        <button className="inline-flex items-center gap-2 text-teal-700 font-bold uppercase tracking-widest text-sm hover:gap-4 transition-all">
+          Download Full Menu <ArrowRight size={16} />
+        </button>
+      </div>
+    </div>
+  </section>
+);
+
+const FAQItem = ({ q, a }: { q: string; a: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border border-slate-200 rounded-xl mb-4 bg-white overflow-hidden transition-all hover:border-teal-200">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex justify-between items-center p-6 text-left focus:outline-none"
+      >
+        <span className="text-lg font-medium text-slate-800">{q}</span>
+        {isOpen ? (
+          <ChevronUp className="text-teal-600" />
+        ) : (
+          <ChevronDown className="text-slate-400" />
+        )}
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-300 bg-slate-50 ${isOpen ? "max-h-40" : "max-h-0"}`}
+      >
+        <p className="text-slate-600 leading-relaxed p-6 pt-0">{a}</p>
       </div>
     </div>
   );
 };
 
-// --- MAIN LAYOUT ---
-
-export default function BlueLeafSpa() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState("home");
-
-  // Scroll to top on page change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentPage]);
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case "home":
-        return <HomePage setPage={setCurrentPage} />;
-      case "menu":
-        return <MenuPage />;
-      case "about":
-        return <AboutPage />;
-      case "faq":
-        return <FaqPage />;
-      default:
-        return <HomePage setPage={setCurrentPage} />;
-    }
-  };
-
-  return (
-    <div className="bg-[#E0E5E5] min-h-screen text-[#0B1215] selection:bg-[#0B1215] selection:text-white font-sans overflow-x-hidden pb-24 md:pb-0">
-      <ScrollProgress />
-
-      {/* DESKTOP SIDEBAR */}
-      <div className="fixed top-0 left-0 h-screen w-20 border-r border-[#0B1215]/10 flex-col justify-between items-center py-8 hidden lg:flex z-40 bg-[#E0E5E5]/80 backdrop-blur-sm">
-        <div
-          className="font-serif font-bold text-2xl rotate-180 cursor-pointer"
-          onClick={() => setCurrentPage("home")}
-          style={{ writingMode: "vertical-rl" }}
-        >
-          BLUE LEAF
-        </div>
-        <div className="flex flex-col gap-6">
-          <button
-            onClick={() => setCurrentPage("home")}
-            className={`hover:scale-110 transition-transform ${currentPage === "home" ? "text-[#0B1215]" : "text-[#0B1215]/40"}`}
-          >
-            <Leaf size={20} />
-          </button>
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="hover:scale-110 transition-transform"
-          >
-            <Menu size={20} />
-          </button>
-        </div>
-        <div
-          className="font-mono text-xs rotate-180"
-          style={{ writingMode: "vertical-rl" }}
-        >
-          EST. 2024
-        </div>
-      </div>
-
-      {/* MOBILE HEADER */}
-      <div className="fixed top-0 w-full p-6 flex justify-between items-center lg:hidden z-40 bg-[#E0E5E5]/90 backdrop-blur-md shadow-sm">
-        <span
-          className="font-serif font-bold text-xl cursor-pointer"
-          onClick={() => setCurrentPage("home")}
-        >
-          BLUE LEAF
+const StickyMobileCTA = () => (
+  <div className="fixed bottom-0 left-0 w-full z-40 md:hidden bg-white/90 backdrop-blur-lg border-t border-slate-200 p-4 shadow-[0_-5px_20px_rgba(0,0,0,0.05)] pb-6">
+    <div className="flex items-center justify-between mb-3 px-1">
+      <div className="flex items-center gap-1.5">
+        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        <span className="text-xs font-bold text-teal-900 uppercase tracking-wider">
+          Slots filling fast
         </span>
-        <button onClick={() => setMenuOpen(true)} className="p-2">
-          <Menu size={24} />
-        </button>
       </div>
-
-      {/* FULL SCREEN MENU OVERLAY */}
-      <div
-        className={`fixed inset-0 bg-[#0B1215] z-50 transition-all duration-700 ${menuOpen ? "translate-y-0" : "-translate-y-full"} flex items-center justify-center overflow-y-auto`}
-      >
-        <button
-          onClick={() => setMenuOpen(false)}
-          className="absolute top-8 right-8 text-white hover:rotate-90 transition-transform duration-300 p-2"
-        >
-          <X size={32} />
-        </button>
-        <div className="flex flex-col items-center gap-8 font-serif text-5xl md:text-7xl text-[#E0E5E5] py-20">
-          {["Home", "Menu", "About", "FAQ"].map((item) => (
-            <button
-              key={item}
-              onClick={() => {
-                setCurrentPage(item.toLowerCase());
-                setMenuOpen(false);
-              }}
-              className={`hover:text-white hover:italic transition-all duration-300 ${currentPage === item.toLowerCase() ? "text-white italic" : ""}`}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* MAIN CONTENT RENDERER */}
-      <main className="lg:pl-20 min-h-screen">
-        {renderPage()}
-
-        {/* FOOTER (On all pages) */}
-        <footer className="bg-[#E0E5E5] pt-16 md:pt-24 pb-12 px-6 md:px-24 border-t border-[#0B1215]/10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-            <div className="md:col-span-5">
-              <h3 className="font-serif text-3xl mb-6">Blue Leaf Spa.</h3>
-              <p className="text-[#0B1215]/60 max-w-sm leading-relaxed">
-                A design-led wellness sanctuary. We combine aesthetic calm with
-                therapeutic precision.
-              </p>
-            </div>
-            <div className="md:col-span-3">
-              <h4 className="font-mono text-xs uppercase tracking-widest mb-6 text-[#0B1215]/40">
-                Find Us
-              </h4>
-              <p className="mb-4">
-                123 Wellness Avenue,
-                <br />
-                Serenity District, Bengaluru
-              </p>
-              <a
-                href="https://maps.google.com"
-                className="inline-flex items-center gap-2 border-b border-[#0B1215] pb-1 hover:opacity-50 transition-opacity"
-              >
-                Get Directions <ArrowUpRight size={14} />
-              </a>
-            </div>
-            <div className="md:col-span-4">
-              <h4 className="font-mono text-xs uppercase tracking-widest mb-6 text-[#0B1215]/40">
-                Booking
-              </h4>
-              <p className="text-xl font-serif mb-2">20% OFF Today</p>
-              <div className="flex gap-4 text-sm font-mono uppercase tracking-widest mt-4">
-                <button
-                  onClick={() => window.open("tel:+919876543210")}
-                  className="hover:text-green-700 transition-colors"
-                >
-                  Call
-                </button>
-                <button
-                  onClick={() => window.open("https://wa.me/919876543210")}
-                  className="hover:text-green-700 transition-colors"
-                >
-                  WhatsApp
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="mt-12 md:mt-24 pt-8 border-t border-[#0B1215]/5 flex flex-col md:flex-row justify-between items-center text-[#0B1215]/40 text-xs font-mono">
-            <p>&copy; 2026 Blue Leaf Parlour. All rights reserved.</p>
-            <p className="mt-2 md:mt-0">Designed for Excellence.</p>
-          </div>
-        </footer>
-      </main>
-
-      {/* MOBILE STICKY BAR */}
-      <div className="fixed bottom-0 left-0 w-full bg-[#0B1215] text-[#E0E5E5] p-4 flex justify-between items-center z-50 md:hidden shadow-[0_-5px_20px_rgba(0,0,0,0.1)]">
-        <div className="flex flex-col">
-          <span className="text-xs text-[#E0E5E5]/60 uppercase tracking-widest">
-            Today's Offer
-          </span>
-          <span className="font-serif text-lg">20% OFF</span>
-        </div>
-        <div className="flex gap-2">
-          <a
-            href="tel:+919876543210"
-            className="w-12 h-12 flex items-center justify-center bg-[#E0E5E5] text-[#0B1215] rounded-full active:scale-95 transition-transform"
-          >
-            <Phone size={20} />
-          </a>
-          <a
-            href="https://wa.me/919876543210"
-            className="w-12 h-12 flex items-center justify-center bg-green-700 text-white rounded-full active:scale-95 transition-transform"
-          >
-            <MessageCircle size={20} />
-          </a>
-        </div>
-      </div>
-
-      <style>{`
-        html { scroll-behavior: smooth; }
-        ::selection { background-color: #0B1215; color: #E0E5E5; }
-        @keyframes spin {
-          from { transform: translate(-50%, -50%) rotate(0deg); }
-          to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out forwards;
-        }
-      `}</style>
+      <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-100">
+        20% OFF TODAY
+      </span>
     </div>
+    <div className="flex gap-3">
+      <a
+        href={`tel:${PHONE_NUMBER}`}
+        className="flex-1 bg-slate-900 text-white py-3.5 rounded-xl flex items-center justify-center gap-2 font-medium shadow-lg shadow-slate-900/20 active:scale-95 transition-transform"
+      >
+        <Phone size={18} /> Call
+      </a>
+      <a
+        href={`https://wa.me/${WHATSAPP_NUMBER}`}
+        className="flex-1 bg-[#25D366] text-white py-3.5 rounded-xl flex items-center justify-center gap-2 font-medium shadow-lg shadow-green-500/20 active:scale-95 transition-transform"
+      >
+        <MessageCircle size={18} /> WhatsApp
+      </a>
+    </div>
+  </div>
+);
+
+const Footer = () => (
+  <footer className="bg-slate-900 text-slate-400 py-16 pb-32 md:pb-16">
+    <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12">
+      <div className="col-span-1 md:col-span-1">
+        <h3 className="text-white text-2xl font-serif mb-6 flex items-center gap-2">
+          <Leaf className="text-teal-500" /> Blue Leaf
+        </h3>
+        <p className="mb-6 text-sm leading-relaxed text-slate-400">
+          Authentic wellness traditions meeting modern luxury. Rejuvenate your
+          body and soul in our premium sanctuary.
+        </p>
+      </div>
+
+      <div>
+        <h4 className="text-white font-bold uppercase tracking-wider text-sm mb-6">
+          Services
+        </h4>
+        <ul className="space-y-3 text-sm">
+          <li>
+            <a href="#" className="hover:text-teal-400 transition-colors">
+              Thai Massage
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:text-teal-400 transition-colors">
+              Swedish Massage
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:text-teal-400 transition-colors">
+              Deep Tissue
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:text-teal-400 transition-colors">
+              Steam Bath
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="text-white font-bold uppercase tracking-wider text-sm mb-6">
+          Company
+        </h4>
+        <ul className="space-y-3 text-sm">
+          <li>
+            <a href="#about" className="hover:text-teal-400 transition-colors">
+              About Us
+            </a>
+          </li>
+          <li>
+            <a
+              href="#contact"
+              className="hover:text-teal-400 transition-colors"
+            >
+              Contact
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:text-teal-400 transition-colors">
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:text-teal-400 transition-colors">
+              Terms of Service
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="text-white font-bold uppercase tracking-wider text-sm mb-6">
+          Visit Us
+        </h4>
+        <p className="mb-4 text-sm">
+          123 Wellness Avenue, Spa District
+          <br />
+          City Name, State, 000000
+        </p>
+        <p className="text-white text-lg font-serif mb-4">{PHONE_NUMBER}</p>
+        <div className="flex gap-2">
+          {/* Social placeholders */}
+          <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors cursor-pointer">
+            <span className="text-xs">IG</span>
+          </div>
+          <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors cursor-pointer">
+            <span className="text-xs">FB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="border-t border-slate-800 mt-16 pt-8 text-center text-xs text-slate-600">
+      <p className="mb-2">
+        &copy; {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.
+      </p>
+      <p>
+        Safe, Hygienic & Respectful Environment. Compliant with Local Wellness
+        Regulations.
+      </p>
+    </div>
+  </footer>
+);
+
+/**
+ * =========================================
+ * MAIN PAGE LAYOUT
+ * =========================================
+ */
+export default function LandingPage() {
+  return (
+    <main className="font-sans antialiased text-slate-900 bg-white selection:bg-teal-100 selection:text-teal-900">
+      <Navbar />
+      <Hero />
+      <Features />
+      <Services />
+
+      <section id="faq" className="py-24 bg-white relative overflow-hidden">
+        {/* Decorative background element */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+
+        <div className="container mx-auto px-6 max-w-3xl relative z-10">
+          <SectionHeading subtitle="Common Questions">
+            Everything You Need To Know
+          </SectionHeading>
+          <div className="space-y-4">
+            {FAQS.map((faq, idx) => (
+              <FAQItem key={idx} q={faq.q} a={faq.a} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+      <StickyMobileCTA />
+    </main>
   );
 }
