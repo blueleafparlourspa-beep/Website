@@ -96,7 +96,7 @@ const SERVICES_DATA = [
     name: "Candle Massage",
     category: "Massages",
     image:
-      "https://images.unsplash.com/photo-1602872030219-aa26a76b92df?q=80&w=800&auto=format&fit=crop",
+      "https://plus.unsplash.com/premium_photo-1661683296246-6e613be58c4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description:
       "Warm wax is dripped onto the body to create a gentler and more relaxing experience. The wax helps melt away muscle knots while providing a soothing sensation, ideal for anxiety.",
     prices: [
@@ -177,7 +177,7 @@ const SERVICES_DATA = [
     name: "Steam Bath",
     category: "Body Scrubs",
     image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop",
+      "https://plus.unsplash.com/premium_photo-1661319103622-991148798a57?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description:
       "Humid, heated room to help open pores and aid detoxification.",
     prices: [{ time: "20 Min", cost: 500 }],

@@ -78,7 +78,7 @@ const SERVICES: Service[] = [
   {
     name: "Deep Tissue Massage",
     image:
-      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description:
       "Focuses on deeper layers of muscle to release chronic tension. Ideal for physical ailments.",
     category: "Massages",
@@ -102,7 +102,7 @@ const SERVICES: Service[] = [
   {
     name: "Candle Massage",
     image:
-      "https://images.unsplash.com/photo-1602872030219-aa26a76b92df?q=80&w=800&auto=format&fit=crop",
+      "https://plus.unsplash.com/premium_photo-1661683296246-6e613be58c4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description:
       "Warm wax is dripped onto the body for a gentle, soothing experience. Ideal for anxiety.",
     category: "Massages",
@@ -152,7 +152,7 @@ const SERVICES: Service[] = [
   {
     name: "Head Massage",
     image:
-      "https://images.unsplash.com/photo-1512290923902-8a92e08040b6?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8aGVhZCUyMG1hc3NhZ2V8ZW58MHx8MHx8fDA%3D",
     description: "Relieves stress, migraine pain, and improves circulation.",
     category: "Therapies",
     prices: [{ duration: "30 Min", price: 1000 }],
@@ -175,7 +175,7 @@ const SERVICES: Service[] = [
   {
     name: "Steam Bath",
     image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop",
+      "https://plus.unsplash.com/premium_photo-1661319103622-991148798a57?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description: "Detoxify and open pores in our humid, heated steam room.",
     category: "Scrubs & Steam",
     prices: [{ duration: "20 Min", price: 500 }],
