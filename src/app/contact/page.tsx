@@ -20,8 +20,8 @@ import {
  * DATA & CONFIGURATION
  * =========================================
  */
-const PHONE_NUMBER = "+91 98765 43210";
-const WHATSAPP_NUMBER = "919876543210";
+const PHONE_NUMBER = "+91 8971180801";
+const WHATSAPP_NUMBER = "918971180809";
 const EMAIL_ADDRESS = "bookings@blueleafspa.com";
 const ADDRESS = "123 Wellness Avenue, Spa District, City Name, 000000";
 
@@ -94,12 +94,7 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <Link
-            href="/#about"
-            className="text-slate-600 hover:text-teal-700 font-medium text-sm tracking-wide transition-colors"
-          >
-            About
-          </Link>
+
           <Link
             href="/services"
             className="text-slate-600 hover:text-teal-700 font-medium text-sm tracking-wide transition-colors"
@@ -113,9 +108,9 @@ const Navbar = () => {
             Contact
           </Link>
 
-          <button className="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-teal-900/20 text-sm font-medium">
+          <a href={`tel:${PHONE_NUMBER}`} className="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-teal-900/20 text-sm font-medium">
             Book Appointment
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}

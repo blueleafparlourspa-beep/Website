@@ -23,8 +23,8 @@ import Link from "next/link";
  */
 
 const COMPANY_NAME = "Blue Leaf Parlour & Spa";
-const WHATSAPP_NUMBER = "919876543210"; // Replace with actual
-const PHONE_NUMBER = "+91 98765 43210"; // Replace with actual
+const WHATSAPP_NUMBER = "918971180809";
+const PHONE_NUMBER = "+91 8971180801";
 
 // Interface for Service Data
 interface Service {
@@ -135,19 +135,7 @@ const SERVICES: Service[] = [
       { duration: "90 Min", price: 4000 },
     ],
   },
-  {
-    name: "Signature / Four Hands",
-    image:
-      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop",
-    description:
-      "Two therapists working in unison. The ultimate luxury experience.",
-    category: "Massages",
-    highlight: true,
-    prices: [
-      { duration: "60 Min", price: 5000 },
-      { duration: "90 Min", price: 6000 },
-    ],
-  },
+
   // --- Therapies & Others ---
   {
     name: "Head Massage",
@@ -185,7 +173,7 @@ const SERVICES: Service[] = [
 const FAQS = [
   {
     q: "Are therapists certified?",
-    a: "Yes, all our therapists are professionally trained and experienced.",
+    a: "Yes, all our therapists are certified South & North Indian female professionals with extensive training and experience.",
   },
   {
     q: "Are prices fixed?",
@@ -260,9 +248,10 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
           {[
-            { title: "About", href: "#about" },
+
             { title: "Services", href: "/service" },
-            { title: "FAQ", href: "#faq" },
+            { title: "Contact us", href: "/contact" },
+
           ].map((item, index) => (
             <a
               key={index}
@@ -272,12 +261,12 @@ const Navbar = () => {
               {item.title}
             </a>
           ))}
-          <Link
-            href="/contact"
+          <a
+            href={`tel:${PHONE_NUMBER}`}
             className="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-teal-900/20 text-sm font-medium"
           >
             Book Appointment
-          </Link>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -292,13 +281,6 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-white shadow-xl p-6 md:hidden flex flex-col space-y-4 border-t border-slate-100">
-          <a
-            href="#about"
-            onClick={() => setIsOpen(false)}
-            className="text-lg font-serif text-slate-800"
-          >
-            About
-          </a>
           <Link
             href="service"
             onClick={() => setIsOpen(false)}
@@ -306,13 +288,6 @@ const Navbar = () => {
           >
             Services
           </Link>
-          <a
-            href="#faq"
-            onClick={() => setIsOpen(false)}
-            className="text-lg font-serif text-slate-800"
-          >
-            FAQ
-          </a>
         </div>
       )}
     </nav>
@@ -359,12 +334,12 @@ const Hero = () => (
                 <span className="text-slate-500 text-sm">on all bookings</span>
               </div>
               <div className="flex gap-2">
-                <button className="flex-1 bg-slate-900 text-white py-3 rounded-lg font-medium text-sm flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
+                <a href={`tel:${PHONE_NUMBER}`} className="flex-1 bg-slate-900 text-white py-3 rounded-lg font-medium text-sm flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
                   <Phone size={16} /> Call Now
-                </button>
-                <button className="flex-1 bg-green-600 text-white py-3 rounded-lg font-medium text-sm flex items-center justify-center gap-2 hover:bg-green-700 transition-colors">
+                </a>
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="flex-1 bg-green-600 text-white py-3 rounded-lg font-medium text-sm flex items-center justify-center gap-2 hover:bg-green-700 transition-colors">
                   <MessageCircle size={16} /> WhatsApp
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -405,8 +380,8 @@ const Features = () => (
           <div className="space-y-8 mt-8">
             {[
               {
-                title: "Certified Therapists",
-                desc: "Professionally trained hands you can trust.",
+                title: "Certified Female Therapists",
+                desc: "Expert South & North Indian female therapists with professional training.",
               },
               {
                 title: "Private & Hygienic",
@@ -521,11 +496,12 @@ const ServiceCard = ({ service }: { service: Service }) => (
         ))}
       </div>
 
-      <button
+      <a
+        href={`tel:${PHONE_NUMBER}`}
         className={`w-full mt-6 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 group-hover:gap-3 ${service.highlight ? "bg-white text-teal-900 hover:bg-teal-50" : "bg-slate-900 text-white hover:bg-teal-700"}`}
       >
         Book Session <ArrowRight size={16} />
-      </button>
+      </a>
     </div>
   </div>
 );
@@ -692,15 +668,6 @@ const Footer = () => (
           City Name, State, 000000
         </p>
         <p className="text-white text-lg font-serif mb-4">{PHONE_NUMBER}</p>
-        <div className="flex gap-2">
-          {/* Social placeholders */}
-          <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors cursor-pointer">
-            <span className="text-xs">IG</span>
-          </div>
-          <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors cursor-pointer">
-            <span className="text-xs">FB</span>
-          </div>
-        </div>
       </div>
     </div>
     <div className="border-t border-slate-800 mt-16 pt-8 text-center text-xs text-slate-600">

@@ -20,8 +20,8 @@ import {
  * DATA & CONFIGURATION
  * =========================================
  */
-const PHONE_NUMBER = "+91 98765 43210";
-const WHATSAPP_NUMBER = "919876543210";
+const PHONE_NUMBER = "+91 8971180801";
+const WHATSAPP_NUMBER = "918971180809";
 
 type Category = "All" | "Massages" | "Body Scrubs" | "Quick Therapies";
 
@@ -274,15 +274,10 @@ const Navbar = () => {
           >
             Services
           </a>
-          <a
-            href="/#about"
-            className="text-slate-600 hover:text-teal-700 font-medium text-sm tracking-wide transition-colors"
-          >
-            About
-          </a>
-          <button className="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-teal-900/20 text-sm font-medium">
+
+          <a href={`tel:${PHONE_NUMBER}`} className="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-teal-900/20 text-sm font-medium">
             Book Appointment
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -310,13 +305,6 @@ const Navbar = () => {
             className="text-lg font-serif text-teal-700 font-bold"
           >
             Services
-          </a>
-          <a
-            href="/#about"
-            onClick={() => setIsOpen(false)}
-            className="text-lg font-serif text-slate-800"
-          >
-            About
           </a>
         </div>
       )}
@@ -363,11 +351,10 @@ export default function ServicesPage() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`whitespace-nowrap pb-2 text-sm font-bold tracking-wider uppercase border-b-2 transition-all duration-300 ${
-                  activeCategory === cat
-                    ? "border-teal-600 text-teal-800"
-                    : "border-transparent text-slate-400 hover:text-slate-600"
-                }`}
+                className={`whitespace-nowrap pb-2 text-sm font-bold tracking-wider uppercase border-b-2 transition-all duration-300 ${activeCategory === cat
+                  ? "border-teal-600 text-teal-800"
+                  : "border-transparent text-slate-400 hover:text-slate-600"
+                  }`}
               >
                 {cat}
               </button>
@@ -445,16 +432,16 @@ export default function ServicesPage() {
 
                   <div className="mt-6 flex gap-3">
                     <a
-                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=I want to book ${service.name}`}
+                      href={`tel:${PHONE_NUMBER}`}
                       className="flex-1 border border-teal-600 text-teal-700 py-2.5 rounded-lg font-medium text-sm flex items-center justify-center gap-2 hover:bg-teal-50 transition-colors"
                     >
-                      <MessageCircle size={16} /> Enquire
+                      <Phone size={16} /> Book Now
                     </a>
                     <a
-                      href={`tel:${PHONE_NUMBER}`}
+                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=I want to book ${service.name}`}
                       className="bg-slate-900 text-white px-4 py-2.5 rounded-lg hover:bg-teal-700 transition-colors"
                     >
-                      <Phone size={16} />
+                      <MessageCircle size={16} />
                     </a>
                   </div>
                 </div>
@@ -493,7 +480,7 @@ export default function ServicesPage() {
                       ₹{service.prices[0].cost}
                     </span>
                     <a
-                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=Book ${service.name}`}
+                      href={`tel:${PHONE_NUMBER}`}
                       className="text-xs text-slate-400 block mt-1 hover:text-teal-600 underline"
                     >
                       Book Now
