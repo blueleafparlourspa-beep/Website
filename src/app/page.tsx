@@ -682,15 +682,23 @@ const Footer = () => (
           Visit Us
         </h4>
         <p className="mb-4 text-sm leading-relaxed">
-          56/1, ITPL Main Road, Maheshwari Nagar,
+          #56/1, Sudha Bar & Restaurant,
           <br />
-          B Narayanapura, Singayyanapalya,
+          ITPL Main Road, Maheshwari Nagar,
           <br />
-          Mahadevapura, Bengaluru,
+          Near Singhannpallya Metro Station,
           <br />
-          Karnataka 560048
+          Mahadevpura, Whitefield Road,
+          <br />
+          Bangalore - 560048
         </p>
-        <p className="text-white text-lg font-serif mb-4">{PHONE_NUMBER}</p>
+        <p className="text-white text-lg font-serif mb-2">{PHONE_NUMBER}</p>
+        <a
+          href="mailto:blueleafparlourspa@gmail.com"
+          className="text-sm text-teal-400 hover:text-teal-300 transition-colors"
+        >
+          blueleafparlourspa@gmail.com
+        </a>
       </div>
     </div>
     <div className="border-t border-slate-800 mt-16 pt-8 text-center text-xs text-slate-600">
