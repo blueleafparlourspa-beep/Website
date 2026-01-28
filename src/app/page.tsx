@@ -13,6 +13,8 @@ import {
   Menu,
   X,
   ArrowRight,
+  Instagram,
+  Facebook,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -241,8 +243,8 @@ const Navbar = () => {
         <div
           className={`font-serif text-2xl font-bold tracking-tight ${scrolled ? "text-teal-900" : "text-teal-900"} flex items-center gap-2`}
         >
-          <Leaf className="w-6 h-6 text-teal-600" />
-          BLUE LEAF
+          <img src="/logo.jpeg" alt="Blue Leaf Parlour And Spa" className="w-10 h-10 rounded-full object-cover" />
+          Blue Leaf Parlour And Spa
         </div>
 
         {/* Desktop Menu */}
@@ -305,7 +307,7 @@ const Hero = () => (
         <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 border border-teal-200 rounded-full bg-white/50 backdrop-blur-sm">
           <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
           <span className="text-teal-800 font-bold text-xs tracking-widest uppercase">
-            Authentic Thai Spa
+            Premium Thai Spa
           </span>
         </div>
 
@@ -590,12 +592,30 @@ const Footer = () => (
     <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12">
       <div className="col-span-1 md:col-span-1">
         <h3 className="text-white text-2xl font-serif mb-6 flex items-center gap-2">
-          <Leaf className="text-teal-500" /> Blue Leaf
+          <img src="/logo.jpeg" alt="Blue Leaf Parlour And Spa" className="w-10 h-10 rounded-full object-cover" /> Blue Leaf Parlour And Spa
         </h3>
         <p className="mb-6 text-sm leading-relaxed text-slate-400">
           Authentic wellness traditions meeting modern luxury. Rejuvenate your
           body and soul in our premium sanctuary.
         </p>
+        <div className="flex gap-4">
+          <a
+            href="https://www.instagram.com/blueleafparlour/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-teal-600 transition-colors"
+          >
+            <Instagram size={18} className="text-white" />
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61558222755378"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-teal-600 transition-colors"
+          >
+            <Facebook size={18} className="text-white" />
+          </a>
+        </div>
       </div>
 
       <div>
@@ -661,10 +681,14 @@ const Footer = () => (
         <h4 className="text-white font-bold uppercase tracking-wider text-sm mb-6">
           Visit Us
         </h4>
-        <p className="mb-4 text-sm">
-          123 Wellness Avenue, Spa District
+        <p className="mb-4 text-sm leading-relaxed">
+          56/1, ITPL Main Road, Maheshwari Nagar,
           <br />
-          City Name, State, 000000
+          B Narayanapura, Singayyanapalya,
+          <br />
+          Mahadevapura, Bengaluru,
+          <br />
+          Karnataka 560048
         </p>
         <p className="text-white text-lg font-serif mb-4">{PHONE_NUMBER}</p>
       </div>
