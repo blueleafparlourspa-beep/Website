@@ -705,9 +705,20 @@ const Footer = () => (
       <p className="mb-2">
         &copy; {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.
       </p>
-      <p>
+      <p className="mb-2">
         Safe, Hygienic & Respectful Environment. Compliant with Local Wellness
         Regulations.
+      </p>
+      <p>
+        Designed and developed by{" "}
+        <a
+          href="https://spikeprofit.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-teal-400 hover:text-teal-300 transition-colors"
+        >
+          SpikeProfit.com
+        </a>
       </p>
     </div>
   </footer>
