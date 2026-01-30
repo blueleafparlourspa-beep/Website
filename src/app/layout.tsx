@@ -13,19 +13,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Blue Leaf Parlour And Spa | Premium Thai Spa in Bengaluru",
-  description: "Experience authentic wellness at Blue Leaf Parlour And Spa. Premium Thai massage, Swedish massage, Deep Tissue therapy & more by certified female therapists in Mahadevapura, Bengaluru. Book now for 20% off!",
-  keywords: ["spa in bengaluru", "thai massage", "swedish massage", "deep tissue massage", "parlour and spa", "mahadevapura spa", "female therapists", "wellness spa"],
+  title: "Best Spa in HSR Layout | Luxury Massage & Wellness – Sunday The Spa",
+  description: "Looking for the best spa in HSR Layout? Experience luxury massages, certified therapists, and complete relaxation at Sunday The Spa. Book now!",
+  keywords: ["spa in HSR Layout", "best spa HSR Layout", "luxury massage", "wellness spa", "Sunday The Spa", "certified therapists", "relaxation spa"],
   icons: {
-    icon: "/logo.jpeg",
-    apple: "/logo.jpeg",
+    icon: "/logo.png",
+    apple: "/logo.png",
   },
   openGraph: {
-    title: "Blue Leaf Parlour And Spa | Premium Thai Spa in Bengaluru",
-    description: "Experience authentic wellness at Blue Leaf Parlour And Spa. Premium massages by certified female therapists in Mahadevapura, Bengaluru.",
+    title: "Best Spa in HSR Layout | Luxury Massage & Wellness – Sunday The Spa",
+    description: "Looking for the best spa in HSR Layout? Experience luxury massages, certified therapists, and complete relaxation at Sunday The Spa. Book now!",
     type: "website",
     locale: "en_IN",
-    siteName: "Blue Leaf Parlour And Spa",
+    siteName: "Sunday The Spa",
   },
 };
 
